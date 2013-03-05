@@ -31,9 +31,15 @@ class logz {
 		$this->file = $file;
 	}
 	/**
-	 * erase the log
+	 * clear the log
 	 */
 	function clear() {
+		file_put_contents($this->dir.$this->file, '');
+	}
+	/**
+	 * delete the log
+	 */
+	function destroy() {
 		@unlink($this->dir.$this->file);
 	}
 	/**
@@ -45,9 +51,21 @@ class logz {
 	function write($data, $dateFormat='r') {
 		file_put_contents(
 			$this->dir.$this->file, 
-			date($dateFormat).' ['.$_SERVER['REMOTE_ADDR'].'] '.$data.PHP_EOL, 
+			date($dateFormat).' ['.$this->getIP().'] '.$data.PHP_EOL, 
 			FILE_APPEND | LOCK_EX
 		);
+	}
+	/**
+	 * get ipaddress of current user
+	 *
+	 * @return string ipaddress
+	 */
+	function getIP() {
+		if(isset($_SERVER['HTTP_X_FORWARDED_FOR']) && $_SERVER['HTTP_X_FORWARTDED_FOR'] != '') {
+		    return $_SERVER['HTTP_X_FORWARDED_FOR'];
+		} else {
+		    return $_SERVER['REMOTE_ADDR'];
+		}
 	}
 }
 
