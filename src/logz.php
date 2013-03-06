@@ -4,7 +4,7 @@
  * PHP logging class
  *
  * @author xero harrison / http://xero.nu
- * @version 1.11
+ * @version 1.2
  * @copyright creative commons attribution-shareAlike 3.0 Unported
  * @license http://creativecommons.org/licenses/by-sa/3.0/ 
  */
@@ -56,6 +56,25 @@ class logz {
 		);
 	}
 	/**
+	 * get the number of lines in a log file
+	 *
+	 * @param int $line line number
+	 * @return string log entry
+	 */
+	function read($lineNumber=1) {
+		$linecount = 1;
+		$handle = fopen($this->dir.$this->file, "r");
+		while(!feof($handle)){
+			$line = fgets($handle);
+			if($linecount == $lineNumber) {
+				break;
+			}
+			$linecount++;
+		}
+		fclose($handle);
+		return $line;
+	}	
+	/**
 	 * get ipaddress of current user
 	 *
 	 * @return string ipaddress
@@ -76,13 +95,12 @@ class logz {
 		$linecount = 0;
 		$handle = fopen($this->dir.$this->file, "r");
 		while(!feof($handle)){
-		  $line = fgets($handle);
-		  $linecount++;
+			$line = fgets($handle);
+			$linecount++;
 		}
 		fclose($handle);
 		$line = null;
 		return $linecount-1; //last line is empty
 	}
 }
-
 ?>
