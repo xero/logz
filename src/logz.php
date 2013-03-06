@@ -4,7 +4,7 @@
  * PHP logging class
  *
  * @author xero harrison / http://xero.nu
- * @version 1.0
+ * @version 1.11
  * @copyright creative commons attribution-shareAlike 3.0 Unported
  * @license http://creativecommons.org/licenses/by-sa/3.0/ 
  */
@@ -66,6 +66,22 @@ class logz {
 		} else {
 		    return $_SERVER['REMOTE_ADDR'];
 		}
+	}
+	/**
+	 * get the number of lines in a log file
+	 *
+	 * @return int line count
+	 */
+	function count() {
+		$linecount = 0;
+		$handle = fopen($this->dir.$this->file, "r");
+		while(!feof($handle)){
+		  $line = fgets($handle);
+		  $linecount++;
+		}
+		fclose($handle);
+		$line = null;
+		return $linecount-1; //last line is empty
 	}
 }
 

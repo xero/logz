@@ -12,14 +12,21 @@ echo "<li>wrote test data</li>";
 $logz->write('here\'s another date type.', 'd/m/Y');
 echo "<li>wrote test data with alternative date format</li>";
 
+echo "<li>log count: ".$logz->count()."</li>";
+
 $logz->clear();
 echo "<li>log cleared</li>";
+
+echo "<li>log count: ".$logz->count()."</li>";
 
 $logz->write('this is a fake log message.');
 echo "<li>wrote more test data</li>";
 
+echo "<li>log count: ".$logz->count()."</li>";
+
 $logz->destroy();
 echo "<li>log destroyed</li></ul>";
+
 die;
 
 ?>
