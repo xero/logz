@@ -7,10 +7,7 @@
  * @copyright 	creative commons attribution-shareAlike 3.0 Unported
  * @license 	http://creativecommons.org/licenses/by-sa/3.0/ 
  * @version 	1.3
- * @package		qoob
- * @subpackage	utils 
  */
-namespace qoob\utils;
 class logz {
 	/**
 	 * @var filename

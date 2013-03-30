@@ -3,7 +3,8 @@
 echo('<h1>logz test</h1><ul>');
 
 require_once('../src/logz.php');
-$logz = new logz(getcwd().'/logs/', 'test.log');
+$logz = new logz();
+$logz->setup(getcwd().'/logs/', 'test.log');
 echo "<li>log created</li>";
 
 $logz->write('testing testing 123...');
@@ -34,7 +35,7 @@ echo "<li>read last line:<br/><strong>".$logz->read($logz->count())."</strong></
 
 echo "<li>log count: ".$logz->count()."</li>";
 
-$logz->destroy();
+//$logz->destroy();
 echo "<li>log destroyed</li></ul>";
 
 die;
