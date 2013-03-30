@@ -3,11 +3,14 @@
  * logz
  * PHP logging class
  *
- * @author xero harrison / http://xero.nu
- * @version 1.2
- * @copyright creative commons attribution-shareAlike 3.0 Unported
- * @license http://creativecommons.org/licenses/by-sa/3.0/ 
+ * @author 		xero harrison / http://xero.nu
+ * @copyright 	creative commons attribution-shareAlike 3.0 Unported
+ * @license 	http://creativecommons.org/licenses/by-sa/3.0/ 
+ * @version 	1.3
+ * @package		qoob
+ * @subpackage	utils 
  */
+namespace qoob\utils;
 class logz {
 	/**
 	 * @var filename
@@ -18,17 +21,33 @@ class logz {
 	 */
 	protected $dir;
 	/**
-	 * constructor
+	 * set directory and filename
 	 *
 	 * @param string $dir the server log directory
 	 * @param string $file the log filename
 	 */
-	function __construct($dir, $file) {
+	function setup($dir, $file) {
+		$this->changeDirectory($dir);
+		$this->changeFile($file);
+	}
+	/**
+	 * set directory and filename
+	 *
+	 * @param string $file the log filename
+	 */
+	function changeFile($file) {
+		$this->file = $file;
+	}
+	/**
+	 * set directory and filename
+	 *
+	 * @param string $dir the server log directory
+	 */
+	function changeDirectory($dir) {
 		if(!is_dir($dir)) {
 			mkdir($dir, 0755, true);
 		}
 		$this->dir = $dir;
-		$this->file = $file;
 	}
 	/**
 	 * clear the log
