@@ -67,7 +67,7 @@ class logz {
 	function write($data, $dateFormat='r') {
 		file_put_contents(
 			$this->dir.DIRECTORY_SEPARATOR.$this->file, 
-			date($dateFormat).' ['.$this->getIP().'] '.$data.PHP_EOL, 
+			date($dateFormat).' ('.$this->getURI().') ['.$this->getIP().'] '.$data.PHP_EOL, 
 			FILE_APPEND | LOCK_EX
 		);
 	}
@@ -102,6 +102,14 @@ class logz {
 		    return $_SERVER['REMOTE_ADDR'];
 		}
 	}
+	/**
+	 * get uri of current request
+	 *
+	 * @return string uri
+	 */
+	function getURI() {
+		return 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+	}	
 	/**
 	 * get the number of lines in a log file
 	 *
